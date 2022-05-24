@@ -6,10 +6,10 @@ Harry Potter App - Project 2
 
 
 **Mock-up Front-end**
-![](./imgs/Welcome Page.png)
+![](./imgs/WelcomePage.png)
 ![](./imgs/Register.png)
-![](./imgs/Home Page.png)
-![](./imgs/User Update Information.png)
+![](./imgs/HomePage.png)
+![](./imgs/UpdateInfo.png)
 ![](./imgs/Characters.png)
 ![](./imgs/Elixirs.png)
 ![](./imgs/Houses.png)
