@@ -19,6 +19,9 @@ Users can:
 ## Use Case Diagram
 ![](./imgs/HPappFlowChart.PNG)
 
+## Database design
+![](./imgs/dbschema.png)
+
 ## Mock-up Front-end
 ![](./imgs/WelcomePage.png)
 ![](./imgs/Register.png)
