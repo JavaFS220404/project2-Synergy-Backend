@@ -13,4 +13,5 @@ Application functionality. Users are able to:
 * Create their own favorite list of characters, spells, and potions for easy access.
 
 Diagram:
+
 ![image](https://user-images.githubusercontent.com/51557213/170950640-71f8df3d-235e-4119-b805-888a87bfd1a0.png)
