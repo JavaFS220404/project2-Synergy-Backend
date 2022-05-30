@@ -1,9 +1,10 @@
 package com.revature.models;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,10 @@ public class Character{
 	private boolean hogwartsStudent;
 	private boolean hogwartsStaff;
 	private String actor;
-	private List<String> alternate_actors= new ArrayList<>();
+	
+	@ElementCollection
+	private List<String> alternate_actors;//= new ArrayList<String>();
+	
 	private boolean alive;
 	private String image;
 	
