@@ -38,7 +38,7 @@ public class Character{
 	private String actor;
 	
 	@ElementCollection
-	private List<String> alternate_actors;//= new ArrayList<String>();
+	private List<String> alternate_actors;
 	
 	private boolean alive;
 	private String image;
