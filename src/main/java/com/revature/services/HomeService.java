@@ -1,48 +1,46 @@
 package com.revature.services;
 
 import java.util.List;
+import java.util.Optional;
 
-import com.revature.daos.HomeDAO;
-import com.revature.daos.HomeDAOHibImpl;
-import com.revature.daos.HomeDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.revature.models.Home;
+import com.revature.repositories.HomeDAO;
 
+@Service
 public class HomeService {
 	
-	private HomeDAO homeDao = new HomeDAOHibImpl(); 
+	private HomeDAO homeDao;
+	
+	@Autowired
+	public HomeService(HomeDAO homeDao) {
+		super();
+		this.homeDao = homeDao;
+	}
 	
 	public List<Home> getAllHomes(){
 		return homeDao.findAll();
 	}
-
-	public Home getSingleHome(String homeName) {
-		return homeDao.findByName(homeName);
+	
+	public Home findById(int id) {
+		Optional<Home> opt = homeDao.findById(id);
+		if(opt.isPresent()) {
+			return opt.get();
+		}else {
+			return null;
+		}
 	}
 	
-	public boolean addNewHome(String homeName, String streetNum, String streetName,
-			String city, String region, String postCode, String country) {
-		Home home = new Home(homeName, streetNum, streetName, city, region, postCode, country);
-		if(homeDao.addHome(home)) {
-			return true;
-		}
-		return false;
+	public Home addOrUpdateHome(Home home) {
+		Home dbHome = homeDao.save(home); //save will saveOrUpdate in Spring Data Jpa
+		return dbHome;
+	}
+	
+	public void destroyHome(int id) {
+		Home home = findById(id);
+		homeDao.delete(home);
 	}
 
-	public boolean updateHome(Home home) {
-		if(homeDao.updateHome(home)) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean destroyHome(String homeName) {
-		return homeDao.deleteHome(homeName);
-	}
-
-	public boolean addNewHome(Home home) {
-		if(homeDao.addHome(home)) {
-			return true;
-		}
-		return false;
-	}
 }

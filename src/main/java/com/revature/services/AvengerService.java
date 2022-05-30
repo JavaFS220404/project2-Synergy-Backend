@@ -1,34 +1,60 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import com.revature.daos.AvengerDAO;
-import com.revature.daos.AvengerDAOHibImpl;
-import com.revature.daos.AvengerDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.revature.models.Avenger;
+import com.revature.models.Home;
+import com.revature.repositories.AvengerDAO;
 
+@Service
 public class AvengerService {
+
+	private AvengerDAO avengerDao;
+	private HomeService homeService;
 	
-	AvengerDAO avengerDao = new AvengerDAOHibImpl();
+	@Autowired
+	public AvengerService(AvengerDAO avengerDao) {
+		super();
+		this.avengerDao = avengerDao;
+		this.homeService = homeService;
+	}
 	
-	public List<Avenger> findAll(){
+	public List<Avenger> getAllAvengers(){
 		return avengerDao.findAll();
 	}
 	
 	public Avenger findById(int id) {
-		return avengerDao.findById(id);
+		Optional<Avenger> opt = avengerDao.findById(id);
+		if(opt.isPresent()) {
+			return opt.get();
+		}else {
+			return null;
+		}
 	}
 	
-	public boolean addAvenger(Avenger avenger) {
-		return avengerDao.addAvenger(avenger);
-	}
-
-	public boolean updateAvenger(Avenger avenger) {
-		return avengerDao.updateAvenger(avenger);
+	public void addOrUpdateAvenger(Avenger avenger) {
+		if(avenger.getHome()!=null &&  avenger.getHome().getId()==0){
+			Home home = homeService.addOrUpdateHome(avenger.getHome());
+			avenger.setHome(home);
+		}
+		avengerDao.save(avenger); //save will saveOrUpdate in Spring Data Jpa
 	}
 	
-	public boolean deleteAvenger(int id) {
-		return avengerDao.deleteAvenger(id);
+	public void destroyAvenger(int id) {
+		Avenger avenger = findById(id);
+		avengerDao.delete(avenger);
 	}
-		
+	
+	public List<Avenger> getBySuperheroName(String name){
+		Optional<List<Avenger>> opt = avengerDao.findBySuperheroName(name);
+		if(opt.isPresent()) {
+			return opt.get();
+		}
+		return new ArrayList<Avenger>(); //empty list 
+	}
 }

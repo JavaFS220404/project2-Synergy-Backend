@@ -1,14 +1,15 @@
 package com.revature.models;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class Character implements Serializable{
+@Entity
+public class Character{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

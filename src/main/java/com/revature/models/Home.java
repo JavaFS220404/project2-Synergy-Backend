@@ -1,109 +1,125 @@
 package com.revature.models;
 
-import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Home implements Serializable{
+public class Home {
 	
 	@Id
-	private String homeName;
-	private String addrStreetNum;
-	private String addrStreetName;
-	private String addrCity;
-	private String addrRegion;
-	private String addrPostCode;
-	private String addrCountry;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 	
-	public Home(String homeName, String addrStreetNum, String addrStreetName, String addrCity, String addrRegion,
-			String addrPostCode, String addrCountry) {
+	@Column(nullable=false, unique=true)
+	private String name;
+	
+	private String streetAddress;
+	private String streetName;
+	private String city;
+	private String region;
+	private String postalCode;
+	private String country;
+	public Home(int id, String name, String streetAddress, String streetName, String city, String region,
+			String postalCode, String country) {
 		super();
-		this.homeName = homeName;
-		this.addrStreetNum = addrStreetNum;
-		this.addrStreetName = addrStreetName;
-		this.addrCity = addrCity;
-		this.addrRegion = addrRegion;
-		this.addrPostCode = addrPostCode;
-		this.addrCountry = addrCountry;
+		this.id = id;
+		this.name = name;
+		this.streetAddress = streetAddress;
+		this.streetName = streetName;
+		this.city = city;
+		this.region = region;
+		this.postalCode = postalCode;
+		this.country = country;
 	}
-
+	
+	public Home(String name, String streetAddress, String streetName, String city, String region, String postalCode,
+			String country) {
+		super();
+		this.name = name;
+		this.streetAddress = streetAddress;
+		this.streetName = streetName;
+		this.city = city;
+		this.region = region;
+		this.postalCode = postalCode;
+		this.country = country;
+	}
+	
 	public Home() {
 		super();
 	}
 
-	public String getHomeName() {
-		return homeName;
+	public int getId() {
+		return id;
 	}
 
-	public void setHomeName(String homeName) {
-		this.homeName = homeName;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getAddrStreetNum() {
-		return addrStreetNum;
+	public String getName() {
+		return name;
 	}
 
-	public void setAddrStreetNum(String addrStreetNum) {
-		this.addrStreetNum = addrStreetNum;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getAddrStreetName() {
-		return addrStreetName;
+	public String getStreetAddress() {
+		return streetAddress;
 	}
 
-	public void setAddrStreetName(String addrStreetName) {
-		this.addrStreetName = addrStreetName;
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
 	}
 
-	public String getAddrCity() {
-		return addrCity;
+	public String getStreetName() {
+		return streetName;
 	}
 
-	public void setAddrCity(String addrCity) {
-		this.addrCity = addrCity;
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
 	}
 
-	public String getAddrRegion() {
-		return addrRegion;
+	public String getCity() {
+		return city;
 	}
 
-	public void setAddrRegion(String addrRegion) {
-		this.addrRegion = addrRegion;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String getAddrPostCode() {
-		return addrPostCode;
+	public String getRegion() {
+		return region;
 	}
 
-	public void setAddrPostCode(String addrPostCode) {
-		this.addrPostCode = addrPostCode;
+	public void setRegion(String region) {
+		this.region = region;
 	}
 
-	public String getAddrCountry() {
-		return addrCountry;
+	public String getPostalCode() {
+		return postalCode;
 	}
 
-	public void setAddrCountry(String addrCountry) {
-		this.addrCountry = addrCountry;
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
 	}
 
+	public String getCountry() {
+		return country;
+	}
 
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((addrCity == null) ? 0 : addrCity.hashCode());
-		result = prime * result + ((addrCountry == null) ? 0 : addrCountry.hashCode());
-		result = prime * result + ((addrPostCode == null) ? 0 : addrPostCode.hashCode());
-		result = prime * result + ((addrRegion == null) ? 0 : addrRegion.hashCode());
-		result = prime * result + ((addrStreetName == null) ? 0 : addrStreetName.hashCode());
-		result = prime * result + ((addrStreetNum == null) ? 0 : addrStreetNum.hashCode());
-		result = prime * result + ((homeName == null) ? 0 : homeName.hashCode());
-		return result;
+		return Objects.hash(city, country, id, name, postalCode, region, streetAddress, streetName);
 	}
 
 	@Override
@@ -115,50 +131,20 @@ public class Home implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Home other = (Home) obj;
-		if (addrCity == null) {
-			if (other.addrCity != null)
-				return false;
-		} else if (!addrCity.equals(other.addrCity))
-			return false;
-		if (addrCountry == null) {
-			if (other.addrCountry != null)
-				return false;
-		} else if (!addrCountry.equals(other.addrCountry))
-			return false;
-		if (addrPostCode == null) {
-			if (other.addrPostCode != null)
-				return false;
-		} else if (!addrPostCode.equals(other.addrPostCode))
-			return false;
-		if (addrRegion == null) {
-			if (other.addrRegion != null)
-				return false;
-		} else if (!addrRegion.equals(other.addrRegion))
-			return false;
-		if (addrStreetName == null) {
-			if (other.addrStreetName != null)
-				return false;
-		} else if (!addrStreetName.equals(other.addrStreetName))
-			return false;
-		if (addrStreetNum == null) {
-			if (other.addrStreetNum != null)
-				return false;
-		} else if (!addrStreetNum.equals(other.addrStreetNum))
-			return false;
-		if (homeName == null) {
-			if (other.homeName != null)
-				return false;
-		} else if (!homeName.equals(other.homeName))
-			return false;
-		return true;
+		return Objects.equals(city, other.city) && Objects.equals(country, other.country) && id == other.id
+				&& Objects.equals(name, other.name) && Objects.equals(postalCode, other.postalCode)
+				&& Objects.equals(region, other.region) && Objects.equals(streetAddress, other.streetAddress)
+				&& Objects.equals(streetName, other.streetName);
 	}
 
 	@Override
 	public String toString() {
-		return "Home [homeName=" + homeName + ", addrStreetNum=" + addrStreetNum + ", addrStreetName=" + addrStreetName
-				+ ", addrCity=" + addrCity + ", addrRegion=" + addrRegion + ", addrPostCode=" + addrPostCode
-				+ ", addrCountry=" + addrCountry + "]";
+		return "Home [id=" + id + ", name=" + name + ", streetAddress=" + streetAddress + ", streetName=" + streetName
+				+ ", city=" + city + ", region=" + region + ", postalCode=" + postalCode + ", country=" + country + "]";
 	}
+
+	
+	
 	
 	
 }

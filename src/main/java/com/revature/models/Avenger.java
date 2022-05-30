@@ -1,50 +1,48 @@
 package com.revature.models;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Avenger implements Serializable{
-	
+public class Avenger {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String heroName;
+	
+	private String superheroName;
+	private String firstName;
+	private String lastName;
 	private String power;
-	private String fName;
-	private String lName;
 	private int powerLevel;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="homeName")
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Home home;
-	
-	public Avenger(int id, String heroName, String power, String fName, String lName, int powerLevel, Home home) {
+
+	public Avenger(int id, String superheroName, String firstName, String lastName, String power, int powerLevel,
+			Home home) {
 		super();
 		this.id = id;
-		this.heroName = heroName;
+		this.superheroName = superheroName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.power = power;
-		this.fName = fName;
-		this.lName = lName;
 		this.powerLevel = powerLevel;
 		this.home = home;
 	}
 
-	public Avenger(String heroName, String power, String fName, String lName, int powerLevel, Home home) {
+	public Avenger(String superheroName, String firstName, String lastName, String power, int powerLevel, Home home) {
 		super();
-		this.heroName = heroName;
+		this.superheroName = superheroName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.power = power;
-		this.fName = fName;
-		this.lName = lName;
 		this.powerLevel = powerLevel;
 		this.home = home;
 	}
@@ -61,12 +59,28 @@ public class Avenger implements Serializable{
 		this.id = id;
 	}
 
-	public String getHeroName() {
-		return heroName;
+	public String getSuperheroName() {
+		return superheroName;
 	}
 
-	public void setHeroName(String heroName) {
-		this.heroName = heroName;
+	public void setSuperheroName(String superheroName) {
+		this.superheroName = superheroName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPower() {
@@ -75,22 +89,6 @@ public class Avenger implements Serializable{
 
 	public void setPower(String power) {
 		this.power = power;
-	}
-
-	public String getfName() {
-		return fName;
-	}
-
-	public void setfName(String fName) {
-		this.fName = fName;
-	}
-
-	public String getlName() {
-		return lName;
-	}
-
-	public void setlName(String lName) {
-		this.lName = lName;
 	}
 
 	public int getPowerLevel() {
@@ -111,7 +109,7 @@ public class Avenger implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(fName, heroName, home, id, lName, power, powerLevel);
+		return Objects.hash(firstName, home, id, lastName, power, powerLevel, superheroName);
 	}
 
 	@Override
@@ -123,17 +121,17 @@ public class Avenger implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Avenger other = (Avenger) obj;
-		return Objects.equals(fName, other.fName) && Objects.equals(heroName, other.heroName)
-				&& Objects.equals(home, other.home) && id == other.id && Objects.equals(lName, other.lName)
-				&& Objects.equals(power, other.power) && powerLevel == other.powerLevel;
+		return Objects.equals(firstName, other.firstName) && Objects.equals(home, other.home) && id == other.id
+				&& Objects.equals(lastName, other.lastName) && Objects.equals(power, other.power)
+				&& powerLevel == other.powerLevel && Objects.equals(superheroName, other.superheroName);
 	}
 
 	@Override
 	public String toString() {
-		return "Avenger [id=" + id + ", heroName=" + heroName + ", power=" + power + ", fName=" + fName + ", lName="
-				+ lName + ", powerLevel=" + powerLevel + ", home=" + home + "]";
+		return "Avenger [id=" + id + ", superheroName=" + superheroName + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", power=" + power + ", powerLevel=" + powerLevel + ", home=" + home + "]";
 	}
 	
 	
-
+	
 }
