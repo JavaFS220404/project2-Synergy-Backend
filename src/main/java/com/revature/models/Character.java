@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Character{
@@ -25,14 +27,19 @@ public class Character{
 	private String ancestry;
 	private String eyeColour;
 	private String hairColour;
+	
+	@OneToOne
 	private Wand wand;
+	
 	private String patronus;
 	private boolean hogwartsStudent;
 	private boolean hogwartsStaff;
 	private String actor;
-	private List<String> alternate_actors;
+	private List<String> alternate_actors= new ArrayList<>();
 	private boolean alive;
 	private String image;
+	
+	
 	public Character(int id, String name, String alternate_names, String species, String gender, String house,
 			String dateOfBirth, int yearOfBirth, boolean wizard, String ancestry, String eyeColour, String hairColour,
 			Wand wand, String patronus, boolean hogwartsStudent, boolean hogwartsStaff, String actor,

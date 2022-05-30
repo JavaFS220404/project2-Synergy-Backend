@@ -13,9 +13,11 @@ public class Wand{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
 	private String wood;
 	private String core;
 	private int length;
+	
 	public Wand(int id, String wood, String core, int length) {
 		super();
 		this.id = id;
