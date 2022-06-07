@@ -1,64 +1,56 @@
 package com.revature.models;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class Character implements Serializable{
+@Entity
+public class Character{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String name;
-	private String alternate_names;
-	private String species;
-	private String gender;
-	private String house;
-	private String dateOfBirth;
-	private int yearOfBirth;
-	private boolean wizard;
-	private String ancestry;
-	private String eyeColour;
-	private String hairColour;
-	private Wand wand;
-	private String patronus;
+	private String character;
+	private String nickname;
 	private boolean hogwartsStudent;
-	private boolean hogwartsStaff;
-	private String actor;
-	private List<String> alternate_actors;
-	private boolean alive;
+	private String hogwartsHouse;
+	private String interpretedBy;
+	
+	@ElementCollection
+	private List<String> child;
+	
 	private String image;
-	public Character(int id, String name, String alternate_names, String species, String gender, String house,
-			String dateOfBirth, int yearOfBirth, boolean wizard, String ancestry, String eyeColour, String hairColour,
-			Wand wand, String patronus, boolean hogwartsStudent, boolean hogwartsStaff, String actor,
-			List<String> alternate_actors, boolean alive, String image) {
+
+	public Character(int id, String character, String nickname, boolean hogwartsStudent, String hogwartsHouse,
+			String interpretedBy, List<String> child, String image) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.alternate_names = alternate_names;
-		this.species = species;
-		this.gender = gender;
-		this.house = house;
-		this.dateOfBirth = dateOfBirth;
-		this.yearOfBirth = yearOfBirth;
-		this.wizard = wizard;
-		this.ancestry = ancestry;
-		this.eyeColour = eyeColour;
-		this.hairColour = hairColour;
-		this.wand = wand;
-		this.patronus = patronus;
+		this.character = character;
+		this.nickname = nickname;
 		this.hogwartsStudent = hogwartsStudent;
-		this.hogwartsStaff = hogwartsStaff;
-		this.actor = actor;
-		this.alternate_actors = alternate_actors;
-		this.alive = alive;
+		this.hogwartsHouse = hogwartsHouse;
+		this.interpretedBy = interpretedBy;
+		this.child = child;
 		this.image = image;
 	}
-	
+
+	public Character(String character, String nickname, boolean hogwartsStudent, String hogwartsHouse,
+			String interpretedBy, List<String> child, String image) {
+		super();
+		this.character = character;
+		this.nickname = nickname;
+		this.hogwartsStudent = hogwartsStudent;
+		this.hogwartsHouse = hogwartsHouse;
+		this.interpretedBy = interpretedBy;
+		this.child = child;
+		this.image = image;
+	}
+
 	public Character() {
 		super();
 	}
@@ -71,108 +63,20 @@ public class Character implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getCharacter() {
+		return character;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCharacter(String character) {
+		this.character = character;
 	}
 
-	public String getAlternate_names() {
-		return alternate_names;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setAlternate_names(String alternate_names) {
-		this.alternate_names = alternate_names;
-	}
-
-	public String getSpecies() {
-		return species;
-	}
-
-	public void setSpecies(String species) {
-		this.species = species;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getHouse() {
-		return house;
-	}
-
-	public void setHouse(String house) {
-		this.house = house;
-	}
-
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public int getYearOfBirth() {
-		return yearOfBirth;
-	}
-
-	public void setYearOfBirth(int yearOfBirth) {
-		this.yearOfBirth = yearOfBirth;
-	}
-
-	public boolean isWizard() {
-		return wizard;
-	}
-
-	public void setWizard(boolean wizard) {
-		this.wizard = wizard;
-	}
-
-	public String getAncestry() {
-		return ancestry;
-	}
-
-	public void setAncestry(String ancestry) {
-		this.ancestry = ancestry;
-	}
-
-	public String getEyeColour() {
-		return eyeColour;
-	}
-
-	public void setEyeColour(String eyeColour) {
-		this.eyeColour = eyeColour;
-	}
-
-	public String getHairColour() {
-		return hairColour;
-	}
-
-	public void setHairColour(String hairColour) {
-		this.hairColour = hairColour;
-	}
-
-	public Wand getWand() {
-		return wand;
-	}
-
-	public void setWand(Wand wand) {
-		this.wand = wand;
-	}
-
-	public String getPatronus() {
-		return patronus;
-	}
-
-	public void setPatronus(String patronus) {
-		this.patronus = patronus;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public boolean isHogwartsStudent() {
@@ -183,36 +87,28 @@ public class Character implements Serializable{
 		this.hogwartsStudent = hogwartsStudent;
 	}
 
-	public boolean isHogwartsStaff() {
-		return hogwartsStaff;
+	public String getHogwartsHouse() {
+		return hogwartsHouse;
 	}
 
-	public void setHogwartsStaff(boolean hogwartsStaff) {
-		this.hogwartsStaff = hogwartsStaff;
+	public void setHogwartsHouse(String hogwartsHouse) {
+		this.hogwartsHouse = hogwartsHouse;
 	}
 
-	public String getActor() {
-		return actor;
+	public String getInterpretedBy() {
+		return interpretedBy;
 	}
 
-	public void setActor(String actor) {
-		this.actor = actor;
+	public void setInterpretedBy(String interpretedBy) {
+		this.interpretedBy = interpretedBy;
 	}
 
-	public List<String> getAlternate_actors() {
-		return alternate_actors;
+	public List<String> getChild() {
+		return child;
 	}
 
-	public void setAlternate_actors(List<String> alternate_actors) {
-		this.alternate_actors = alternate_actors;
-	}
-
-	public boolean isAlive() {
-		return alive;
-	}
-
-	public void setAlive(boolean alive) {
-		this.alive = alive;
+	public void setChild(List<String> child) {
+		this.child = child;
 	}
 
 	public String getImage() {
@@ -225,9 +121,7 @@ public class Character implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(actor, alive, alternate_actors, alternate_names, ancestry, dateOfBirth, eyeColour, gender,
-				hairColour, hogwartsStaff, hogwartsStudent, house, id, image, name, patronus, species, wand, wizard,
-				yearOfBirth);
+		return Objects.hash(character, child, hogwartsHouse, hogwartsStudent, id, image, interpretedBy, nickname);
 	}
 
 	@Override
@@ -239,28 +133,52 @@ public class Character implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Character other = (Character) obj;
-		return Objects.equals(actor, other.actor) && alive == other.alive
-				&& Objects.equals(alternate_actors, other.alternate_actors)
-				&& Objects.equals(alternate_names, other.alternate_names) && Objects.equals(ancestry, other.ancestry)
-				&& Objects.equals(dateOfBirth, other.dateOfBirth) && Objects.equals(eyeColour, other.eyeColour)
-				&& Objects.equals(gender, other.gender) && Objects.equals(hairColour, other.hairColour)
-				&& hogwartsStaff == other.hogwartsStaff && hogwartsStudent == other.hogwartsStudent
-				&& Objects.equals(house, other.house) && id == other.id && Objects.equals(image, other.image)
-				&& Objects.equals(name, other.name) && Objects.equals(patronus, other.patronus)
-				&& Objects.equals(species, other.species) && Objects.equals(wand, other.wand) && wizard == other.wizard
-				&& yearOfBirth == other.yearOfBirth;
+		return Objects.equals(character, other.character) && Objects.equals(child, other.child)
+				&& Objects.equals(hogwartsHouse, other.hogwartsHouse) && hogwartsStudent == other.hogwartsStudent
+				&& id == other.id && Objects.equals(image, other.image)
+				&& Objects.equals(interpretedBy, other.interpretedBy) && Objects.equals(nickname, other.nickname);
 	}
 
 	@Override
 	public String toString() {
-		return "Character [id=" + id + ", name=" + name + ", alternate_names=" + alternate_names + ", species="
-				+ species + ", gender=" + gender + ", house=" + house + ", dateOfBirth=" + dateOfBirth
-				+ ", yearOfBirth=" + yearOfBirth + ", wizard=" + wizard + ", ancestry=" + ancestry + ", eyeColour="
-				+ eyeColour + ", hairColour=" + hairColour + ", wand=" + wand + ", patronus=" + patronus
-				+ ", hogwartsStudent=" + hogwartsStudent + ", hogwartsStaff=" + hogwartsStaff + ", actor=" + actor
-				+ ", alternate_actors=" + alternate_actors + ", alive=" + alive + ", image=" + image + "]";
+		return "Character [id=" + id + ", character=" + character + ", nickname=" + nickname + ", hogwartsStudent="
+				+ hogwartsStudent + ", hogwartsHouse=" + hogwartsHouse + ", interpretedBy=" + interpretedBy + ", child="
+				+ child + ", image=" + image + "]";
 	}
 	
 	
 	
+	
+	
 }
+	/*
+	private String name;
+	private String alternate_names;
+	private String species;
+	private String gender;
+	private String house;
+	private String dateOfBirth;
+	private int yearOfBirth;
+	private boolean wizard;
+	private String ancestry;
+	private String eyeColour;
+	private String hairColour;
+	
+	@OneToOne
+	private Wand wand;
+	
+	private String patronus;
+	private boolean hogwartsStudent;
+	private boolean hogwartsStaff;
+	private String actor;
+	
+	@ElementCollection
+	private List<String> alternate_actors;
+	
+	private boolean alive;
+	private String image;
+	*/
+	
+	
+	
+	
