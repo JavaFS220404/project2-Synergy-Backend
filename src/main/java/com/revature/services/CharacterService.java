@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.Character;
+
+import com.revature.models.Trainer;
 import com.revature.repositories.CharacterDAO;
 
 @Service
@@ -33,13 +36,20 @@ public class CharacterService {
 		}
 	}
 	
-	public void addOrUpdateCharacter(Character character) {
-		characterDao.save(character);
+	public List<Character> findByHouse(String hogwartsHouse) {
+		Optional<List<Character>> opt = characterDao.findByHogwartsHouse(hogwartsHouse);
+		if(opt.isPresent()) {
+			return opt.get();
+		}return new ArrayList<Character>();
 	}
 	
-	public void destroyCharacter(int id) {
-		Character character = findById(id);
-		characterDao.delete(character);
+	
+	
+	public List<Character> findByStatus(boolean hogwartsStudent) {
+		Optional<List<Character>> opt = characterDao.findByHogwartsStudent(hogwartsStudent);
+		if(opt.isPresent()) {
+			return opt.get();
+		}return new ArrayList<Character>();
 	}
 
 }

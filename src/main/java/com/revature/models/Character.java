@@ -1,13 +1,24 @@
 package com.revature.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Character{
@@ -15,114 +26,166 @@ public class Character{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String character;
+	@Column(nullable=false)
+	private String name;
 	private String nickname;
+	@Column(nullable=false)
 	private boolean hogwartsStudent;
+	@Column(nullable=false)
 	private String hogwartsHouse;
+	@Column(nullable=false)
 	private String interpretedBy;
 	
-	@ElementCollection
-	private List<String> child;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="parents_children", 
+	                joinColumns={@JoinColumn(name="parent_id")}, 
+	                inverseJoinColumns={@JoinColumn(name="child_id")})
+	private List<Character> parents;
+	//@ManyToMany(fetch=FetchType.EAGER)
+	
+	@ManyToMany(mappedBy = "parents", cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Character> children;
 	
 	private String image;
-
-	public Character(int id, String character, String nickname, boolean hogwartsStudent, String hogwartsHouse,
-			String interpretedBy, List<String> child, String image) {
-		super();
-		this.id = id;
-		this.character = character;
-		this.nickname = nickname;
-		this.hogwartsStudent = hogwartsStudent;
-		this.hogwartsHouse = hogwartsHouse;
-		this.interpretedBy = interpretedBy;
-		this.child = child;
-		this.image = image;
-	}
-
-	public Character(String character, String nickname, boolean hogwartsStudent, String hogwartsHouse,
-			String interpretedBy, List<String> child, String image) {
-		super();
-		this.character = character;
-		this.nickname = nickname;
-		this.hogwartsStudent = hogwartsStudent;
-		this.hogwartsHouse = hogwartsHouse;
-		this.interpretedBy = interpretedBy;
-		this.child = child;
-		this.image = image;
-	}
 
 	public Character() {
 		super();
 	}
 
+	
+
+	public Character(int id, String name, String nickname, boolean hogwartsStudent, String hogwartsHouse,
+			String interpretedBy, List<Character> parents, List<Character> children, String image) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.nickname = nickname;
+		this.hogwartsStudent = hogwartsStudent;
+		this.hogwartsHouse = hogwartsHouse;
+		this.interpretedBy = interpretedBy;
+		this.parents = parents;
+		this.children = children;
+		this.image = image;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}
+
+
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getCharacter() {
-		return character;
+
+
+	public String getName() {
+		return name;
 	}
 
-	public void setCharacter(String character) {
-		this.character = character;
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+
 
 	public String getNickname() {
 		return nickname;
 	}
 
+
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
+
 
 	public boolean isHogwartsStudent() {
 		return hogwartsStudent;
 	}
 
+
+
 	public void setHogwartsStudent(boolean hogwartsStudent) {
 		this.hogwartsStudent = hogwartsStudent;
 	}
+
+
 
 	public String getHogwartsHouse() {
 		return hogwartsHouse;
 	}
 
+
+
 	public void setHogwartsHouse(String hogwartsHouse) {
 		this.hogwartsHouse = hogwartsHouse;
 	}
+
+
 
 	public String getInterpretedBy() {
 		return interpretedBy;
 	}
 
+
+
 	public void setInterpretedBy(String interpretedBy) {
 		this.interpretedBy = interpretedBy;
 	}
 
-	public List<String> getChild() {
-		return child;
+
+
+	public List<Character> getParents() {
+		return parents;
 	}
 
-	public void setChild(List<String> child) {
-		this.child = child;
+
+
+	public void setParents(List<Character> parents) {
+		this.parents = parents;
 	}
+
+
+
+	public List<Character> getChildren() {
+		return children;
+	}
+
+
+
+	public void setChildren(List<Character> children) {
+		this.children = children;
+	}
+
+
 
 	public String getImage() {
 		return image;
 	}
 
+
+
 	public void setImage(String image) {
 		this.image = image;
 	}
 
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(character, child, hogwartsHouse, hogwartsStudent, id, image, interpretedBy, nickname);
+		return Objects.hash(children, hogwartsHouse, hogwartsStudent, id, image, interpretedBy, name, nickname,
+				parents);
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -133,52 +196,25 @@ public class Character{
 		if (getClass() != obj.getClass())
 			return false;
 		Character other = (Character) obj;
-		return Objects.equals(character, other.character) && Objects.equals(child, other.child)
-				&& Objects.equals(hogwartsHouse, other.hogwartsHouse) && hogwartsStudent == other.hogwartsStudent
-				&& id == other.id && Objects.equals(image, other.image)
-				&& Objects.equals(interpretedBy, other.interpretedBy) && Objects.equals(nickname, other.nickname);
+		return Objects.equals(children, other.children) && Objects.equals(hogwartsHouse, other.hogwartsHouse)
+				&& hogwartsStudent == other.hogwartsStudent && id == other.id && Objects.equals(image, other.image)
+				&& Objects.equals(interpretedBy, other.interpretedBy) && Objects.equals(name, other.name)
+				&& Objects.equals(nickname, other.nickname) && Objects.equals(parents, other.parents);
 	}
+
+
 
 	@Override
 	public String toString() {
-		return "Character [id=" + id + ", character=" + character + ", nickname=" + nickname + ", hogwartsStudent="
-				+ hogwartsStudent + ", hogwartsHouse=" + hogwartsHouse + ", interpretedBy=" + interpretedBy + ", child="
-				+ child + ", image=" + image + "]";
+		return "Character [id=" + id + ", name=" + name + ", nickname=" + nickname + ", hogwartsStudent="
+				+ hogwartsStudent + ", hogwartsHouse=" + hogwartsHouse + ", interpretedBy=" + interpretedBy
+				+ ", parents=" + parents + ", children=" + children + ", image=" + image + "]";
 	}
-	
-	
-	
+
+
+
 	
 	
 }
-	/*
-	private String name;
-	private String alternate_names;
-	private String species;
-	private String gender;
-	private String house;
-	private String dateOfBirth;
-	private int yearOfBirth;
-	private boolean wizard;
-	private String ancestry;
-	private String eyeColour;
-	private String hairColour;
-	
-	@OneToOne
-	private Wand wand;
-	
-	private String patronus;
-	private boolean hogwartsStudent;
-	private boolean hogwartsStaff;
-	private String actor;
-	
-	@ElementCollection
-	private List<String> alternate_actors;
-	
-	private boolean alive;
-	private String image;
-	*/
-	
-	
 	
 	
