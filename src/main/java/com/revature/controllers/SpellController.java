@@ -43,23 +43,23 @@ private SpellService spellService;
 		}
 	}
 	
-	@PostMapping
-	public ResponseEntity<Spell> addSpell(@RequestBody Spell spell){
-		spellService.addOrUpdateSpell(spell);
-		return ResponseEntity.status(201).build();
-	}
-	
-	@PutMapping
-	public ResponseEntity<Spell> updateSpell(@RequestBody Spell spell){
-		spellService.addOrUpdateSpell(spell);
-		return ResponseEntity.status(202).build();
-	}
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Spell> deleteSpell(@PathVariable("id") int id){
-		spellService.destroySpell(id);
-		return ResponseEntity.status(202).build();
-	}
+//	@PostMapping
+//	public ResponseEntity<Spell> addSpell(@RequestBody Spell spell){
+//		spellService.addOrUpdateSpell(spell);
+//		return ResponseEntity.status(201).build();
+//	}
+//	
+//	@PutMapping
+//	public ResponseEntity<Spell> updateSpell(@RequestBody Spell spell){
+//		spellService.addOrUpdateSpell(spell);
+//		return ResponseEntity.status(202).build();
+//	}
+//	
+//	@DeleteMapping("/{id}")
+//	public ResponseEntity<Spell> deleteSpell(@PathVariable("id") int id){
+//		spellService.destroySpell(id);
+//		return ResponseEntity.status(202).build();
+//	}
 	
 
 }

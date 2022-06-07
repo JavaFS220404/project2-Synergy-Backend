@@ -33,13 +33,13 @@ public class SpellService {
 		}
 	}
 	
-	public void addOrUpdateSpell(Spell spell) {
-		spellDao.save(spell); 
-	}
-	
-	public void destroySpell(int id) {
-		Spell spell = findById(id);
-		spellDao.delete(spell);
-	}
+//	public void addOrUpdateSpell(Spell spell) {
+//		spellDao.save(spell); 
+//	}
+//	
+//	public void destroySpell(int id) {
+//		Spell spell = findById(id);
+//		spellDao.delete(spell);
+//	}
 	
 }

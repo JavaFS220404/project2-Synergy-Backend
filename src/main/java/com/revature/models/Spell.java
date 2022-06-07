@@ -14,6 +14,7 @@ public class Spell{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	private String idName;
 	private String name;
 	private String incantation;
 	private String effect;
@@ -22,10 +23,24 @@ public class Spell{
 	private String light;
 	private String creator;
 	
-	public Spell(int id, String name, String incantation, String effect, boolean canBeVerbal, String type, String light,
-			String creator) {
+	public Spell(int id, String idName, String name, String incantation, String effect, boolean canBeVerbal,
+			String type, String light, String creator) {
 		super();
 		this.id = id;
+		this.idName = idName;
+		this.name = name;
+		this.incantation = incantation;
+		this.effect = effect;
+		this.canBeVerbal = canBeVerbal;
+		this.type = type;
+		this.light = light;
+		this.creator = creator;
+	}
+
+	public Spell(String idName, String name, String incantation, String effect, boolean canBeVerbal, String type,
+			String light, String creator) {
+		super();
+		this.idName = idName;
 		this.name = name;
 		this.incantation = incantation;
 		this.effect = effect;
@@ -39,12 +54,40 @@ public class Spell{
 		super();
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(canBeVerbal, creator, effect, id, idName, incantation, light, name, type);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Spell other = (Spell) obj;
+		return canBeVerbal == other.canBeVerbal && Objects.equals(creator, other.creator)
+				&& Objects.equals(effect, other.effect) && id == other.id && Objects.equals(idName, other.idName)
+				&& Objects.equals(incantation, other.incantation) && Objects.equals(light, other.light)
+				&& Objects.equals(name, other.name) && Objects.equals(type, other.type);
+	}
+
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getIdName() {
+		return idName;
+	}
+
+	public void setIdName(String idName) {
+		this.idName = idName;
 	}
 
 	public String getName() {
@@ -104,33 +147,11 @@ public class Spell{
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(canBeVerbal, creator, effect, id, incantation, light, name, type);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Spell other = (Spell) obj;
-		return canBeVerbal == other.canBeVerbal && Objects.equals(creator, other.creator)
-				&& Objects.equals(effect, other.effect) && id == other.id
-				&& Objects.equals(incantation, other.incantation) && Objects.equals(light, other.light)
-				&& Objects.equals(name, other.name) && Objects.equals(type, other.type);
-	}
-
-	@Override
 	public String toString() {
-		return "Spell [id=" + id + ", name=" + name + ", incantation=" + incantation + ", effect=" + effect
-				+ ", canBeVerbal=" + canBeVerbal + ", type=" + type + ", light=" + light + ", creator=" + creator + "]";
+		return "Spell [id=" + id + ", idName=" + idName + ", name=" + name + ", incantation=" + incantation
+				+ ", effect=" + effect + ", canBeVerbal=" + canBeVerbal + ", type=" + type + ", light=" + light
+				+ ", creator=" + creator + "]";
 	}
-	
-	
-	
 	
 	
 
