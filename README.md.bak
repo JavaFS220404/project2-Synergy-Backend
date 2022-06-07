@@ -1,4 +1,4 @@
-# [Harry Potterz World] [Synergy- GitHub Heroes]
+# [Harry Potter World] [Synergy- GitHub Heroes]
 Application that allows the user access information about the world of Harry Potter including characters, spells, and potions. They can also select their favorites from each category for easy reference.
 ### Requirements
 Users can:
