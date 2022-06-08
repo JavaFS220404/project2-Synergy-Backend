@@ -18,13 +18,27 @@ public class Favourites {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int userId;
-	@OneToOne(fetch=FetchType.EAGER)
-	private Character character;
+	private int charactersId;
 	private int potionsId;
 	private int spellsId;
+	
+	public Favourites(int id, int userId, int charactersId, int potionsId, int spellsId) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.charactersId = charactersId;
+		this.potionsId = potionsId;
+		this.spellsId = spellsId;
+	}
+
+	public Favourites() {
+		super();
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -37,24 +51,31 @@ public class Favourites {
 		this.userId = userId;
 	}
 
-	public Character getCharacter() {
-		return character;
+	public int getCharactersId() {
+		return charactersId;
 	}
-	public void setCharacter(Character character) {
-		this.character = character;
+
+	public void setCharactersId(int charactersId) {
+		this.charactersId = charactersId;
 	}
+
 	public int getPotionsId() {
 		return potionsId;
 	}
+
 	public void setPotionsId(int potionsId) {
 		this.potionsId = potionsId;
 	}
+
 	public int getSpellsId() {
 		return spellsId;
 	}
+
 	public void setSpellsId(int spellsId) {
 		this.spellsId = spellsId;
-	}	
+	}
+	
+	
 	
 	
 }

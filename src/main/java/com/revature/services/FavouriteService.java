@@ -18,12 +18,15 @@ import com.revature.repositories.FavouriteDAO;
 @Service
 public class FavouriteService {
 	private FavouriteDAO favouriteDao;
+	private CharacterDAO characterDao;
 	
 	@Autowired
-	public FavouriteService(FavouriteDAO favouriteDao) {
+	public FavouriteService(FavouriteDAO favouriteDao, CharacterDAO characterDao) {
 		super();
 		this.favouriteDao = favouriteDao;
+		this.characterDao = characterDao;
 	}
+	
 	
 	public List<Character> viewAllFavouritelist(User user){
 	
@@ -33,10 +36,10 @@ public class FavouriteService {
        
       for(Favourites favourite : favouriteList) {
     	  //add above favouriteCharacterList 
-    	  favouriteCharacterList.add(favourite.getCharacter());
+    	  favouriteCharacterList.add(characterDao.getById(favourite.getCharactersId()));
 	
       }
-      return favouriteCharacterList;
+      return null;
 	}
 	
 	public void addFavouriteCharacter(Character character,User user) {
@@ -44,9 +47,7 @@ public class FavouriteService {
 		Favourites favourites = new Favourites();
 		
 		favourites.setUserId(user.getId());
-		favourites.setCharacter(character);
-		//favourites.setPotionsId("potionsId");
-		//favourites.setSpellsId("spellsId");
+		favourites.setCharactersId(character.getId());
 		favouriteDao.save(favourites);
 	}
 	
@@ -73,8 +74,8 @@ public class FavouriteService {
 		List<Favourites> allFavourites = favouriteDao.findByUserId(user.getId());
 		List<String> favList = new ArrayList<>();
 		for(Favourites fav : allFavourites) {
-			if(fav.getCharacter()!=null) {
-				favList.add(Integer.toString(fav.getCharacter().getId()));
+			if(fav.getCharactersId()!=0) {
+				favList.add(Integer.toString(fav.getCharactersId()));
 			} 
 		}
 		return favList;
