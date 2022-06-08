@@ -34,7 +34,7 @@ private PotionService potionService;
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Potion> onePotion(@PathVariable("id")int id){
+	public ResponseEntity<Potion> onePotion(@PathVariable("id") String id){
 		Potion potion = potionService.findById(id);
 		if(potion!=null) {
 			return ResponseEntity.status(200).body(potion);
@@ -56,7 +56,7 @@ private PotionService potionService;
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Potion> deletePotion(@PathVariable("id") int id){
+	public ResponseEntity<Potion> deletePotion(@PathVariable("id") String id){
 		potionService.destroyPotion(id);
 		return ResponseEntity.status(202).build();
 	}

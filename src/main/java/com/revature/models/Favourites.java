@@ -19,10 +19,10 @@ public class Favourites {
 	private int id;
 	private int userId;
 	private int charactersId;
-	private int potionsId;
-	private int spellsId;
+	private String potionsId;
+	private String spellsId;
 	
-	public Favourites(int id, int userId, int charactersId, int potionsId, int spellsId) {
+	public Favourites(int id, int userId, int charactersId, String potionsId, String spellsId) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -59,19 +59,19 @@ public class Favourites {
 		this.charactersId = charactersId;
 	}
 
-	public int getPotionsId() {
+	public String getPotionsId() {
 		return potionsId;
 	}
 
-	public void setPotionsId(int potionsId) {
+	public void setPotionsId(String potionsId) {
 		this.potionsId = potionsId;
 	}
 
-	public int getSpellsId() {
+	public String getSpellsId() {
 		return spellsId;
 	}
 
-	public void setSpellsId(int spellsId) {
+	public void setSpellsId(String spellsId) {
 		this.spellsId = spellsId;
 	}
 	

@@ -24,7 +24,7 @@ public class PotionService {
 		return potionDao.findAll();
 	}
 	
-	public Potion findById(int id) {
+	public Potion findById(String id) {
 		Optional<Potion> opt = potionDao.findById(id);
 		if(opt.isPresent()) {
 			return opt.get();
@@ -37,7 +37,7 @@ public class PotionService {
 		potionDao.save(potion); 
 	}
 	
-	public void destroyPotion(int id) {
+	public void destroyPotion(String id) {
 		Potion potion = findById(id);
 		potionDao.delete(potion);
 	}

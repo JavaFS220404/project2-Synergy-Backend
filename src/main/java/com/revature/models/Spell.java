@@ -11,8 +11,8 @@ import javax.persistence.Id;
 public class Spell{
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private String id;
 	
 	private String idName;
 	private String name;
@@ -23,7 +23,7 @@ public class Spell{
 	private String light;
 	private String creator;
 	
-	public Spell(int id, String idName, String name, String incantation, String effect, boolean canBeVerbal,
+	public Spell(String id, String idName, String name, String incantation, String effect, boolean canBeVerbal,
 			String type, String light, String creator) {
 		super();
 		this.id = id;
@@ -74,11 +74,11 @@ public class Spell{
 				&& Objects.equals(name, other.name) && Objects.equals(type, other.type);
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

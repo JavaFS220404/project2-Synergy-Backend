@@ -85,8 +85,8 @@ public class FavouriteService {
 		List<Favourites> allFavourites = favouriteDao.findByUserId(user.getId());
 		List<String> favList = new ArrayList<>();
 		for(Favourites fav : allFavourites) {
-			if(fav.getPotionsId()!=0) {
-				favList.add(Integer.toString(fav.getPotionsId()));
+			if(fav.getPotionsId()!=null) {
+				favList.add((fav.getPotionsId()));
 			} 
 		}
 		return favList;
@@ -96,8 +96,8 @@ public class FavouriteService {
 		List<Favourites> allFavourites = favouriteDao.findByUserId(user.getId());
 		List<String> favList = new ArrayList<>();
 		for(Favourites fav : allFavourites) {
-			if(fav.getSpellsId()!=0) {
-				favList.add(Integer.toString(fav.getSpellsId()));
+			if(fav.getSpellsId()!=null) {
+				favList.add((fav.getSpellsId()));
 			} 
 		}
 		return favList;

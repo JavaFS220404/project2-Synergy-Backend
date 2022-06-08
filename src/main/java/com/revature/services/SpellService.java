@@ -24,7 +24,7 @@ public class SpellService {
 		return spellDao.findAll();
 	}
 	
-	public Spell findById(int id) {
+	public Spell findById(String id) {
 		Optional<Spell> opt = spellDao.findById(id);
 		if(opt.isPresent()) {
 			return opt.get();
@@ -32,6 +32,7 @@ public class SpellService {
 			return null;
 		}
 	}
+	
 	
 //	public void addOrUpdateSpell(Spell spell) {
 //		spellDao.save(spell); 

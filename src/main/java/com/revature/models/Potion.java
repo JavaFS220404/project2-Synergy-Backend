@@ -17,8 +17,8 @@ public class Potion{
 
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private String id;
 	private String name;
 	private String effect;
 	private String sideEffects;
@@ -33,7 +33,7 @@ public class Potion{
 	private String inventors;
 	private String manufacturer;
 	
-	public Potion(int id, String name, String effect, String sideEffects, String characteristics, String time,
+	public Potion(String id, String name, String effect, String sideEffects, String characteristics, String time,
 			String difficulty, List<Ingredient> ingredients, String inventors, String manufacturer) {
 		super();
 		this.id = id;
@@ -53,11 +53,11 @@ public class Potion{
 	}
 	
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

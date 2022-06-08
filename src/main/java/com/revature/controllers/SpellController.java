@@ -34,7 +34,7 @@ private SpellService spellService;
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Spell> oneSpell(@PathVariable("id")int id){
+	public ResponseEntity<Spell> oneSpell(@PathVariable("id") String id){
 		Spell spell = spellService.findById(id);
 		if(spell!=null) {
 			return ResponseEntity.status(200).body(spell);

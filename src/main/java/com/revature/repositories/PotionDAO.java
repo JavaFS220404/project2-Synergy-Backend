@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.revature.models.Potion;
 
-public interface PotionDAO extends JpaRepository<Potion, Integer>{
+public interface PotionDAO extends JpaRepository<Potion, String>{
 
 }
