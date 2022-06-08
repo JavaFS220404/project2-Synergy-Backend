@@ -68,6 +68,39 @@ public class FavouriteService {
 		favourites.setSpellsId(spell.getId());
 		favouriteDao.save(favourites);
 	}
+
+	public List<String> getFavCharacters(User user) {
+		List<Favourites> allFavourites = favouriteDao.findByUserId(user.getId());
+		List<String> favList = new ArrayList<>();
+		for(Favourites fav : allFavourites) {
+			if(fav.getCharacter()!=null) {
+				favList.add(Integer.toString(fav.getCharacter().getId()));
+			} 
+		}
+		return favList;
+	}
+
+	public List<String> getFavPotions(User user) {
+		List<Favourites> allFavourites = favouriteDao.findByUserId(user.getId());
+		List<String> favList = new ArrayList<>();
+		for(Favourites fav : allFavourites) {
+			if(fav.getPotionsId()!=0) {
+				favList.add(Integer.toString(fav.getPotionsId()));
+			} 
+		}
+		return favList;
+	}
+
+	public List<String> getFavSpells(User user) {
+		List<Favourites> allFavourites = favouriteDao.findByUserId(user.getId());
+		List<String> favList = new ArrayList<>();
+		for(Favourites fav : allFavourites) {
+			if(fav.getSpellsId()!=0) {
+				favList.add(Integer.toString(fav.getSpellsId()));
+			} 
+		}
+		return favList;
+	}
 	
 	
 		

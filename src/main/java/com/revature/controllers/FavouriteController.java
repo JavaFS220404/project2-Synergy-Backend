@@ -117,4 +117,27 @@ public class FavouriteController {
 		//}
 		//return ResponseEntity.status(403).build();
 	}
+	
+	//Mapping get favourites
+	
+	@GetMapping("/character")
+	public List<String> getFavCharacters(){
+		//User user = (User)session.getAttribute("user");
+		User user = getUser();
+		return favouriteService.getFavCharacters(user);
+	}
+	
+	@GetMapping("/potion")
+	public List<String> getFavPotions(){
+		//User user = (User)session.getAttribute("user");
+		User user = getUser();
+		return favouriteService.getFavPotions(user);
+	}
+	
+	@GetMapping("/spell")
+	public List<String> getFavSpells(){
+		//User user = (User)session.getAttribute("user");
+		User user = getUser();
+		return favouriteService.getFavSpells(user);
+	}
 }
