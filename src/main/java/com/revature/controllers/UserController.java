@@ -54,11 +54,13 @@ public class UserController {
 		}
 	}
 
+
 	@PutMapping
 	public ResponseEntity<User> update(@RequestBody User user){
 		userService.Update(user);
 		return ResponseEntity.status(200).build();
 }
 	
+
 
 }

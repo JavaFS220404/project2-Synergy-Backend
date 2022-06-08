@@ -58,15 +58,14 @@ public class FavouriteController {
 		return favouriteService.viewAllFavouritelist(user);
 	}
 	@PostMapping
-	public ResponseEntity<Character> addFavourite(@RequestBody Character character){
-		//if(session.getAttribute("logged in")!=null&&(Boolean)session.getAttribute("logged in")) {
-			//User user = (User)session.getAttribute("user");
-
-		User user = getUser();
+	public ResponseEntity<Character> addFavourite(@RequestBody Character character, HttpSession session){
+		if(session.getAttribute("logged in")!=null&&(Boolean)session.getAttribute("logged in")) {
+			User user = (User)session.getAttribute("user");
+			//User user = getUser();
 			favouriteService.addFavouriteCharacter(character,user);
 			return ResponseEntity.status(201).build();
-		//}
-		//return ResponseEntity.status(403).build();
+		}
+		return ResponseEntity.status(403).build();
 	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Character> deleteFavourite(@PathVariable("id") int id){
@@ -81,40 +80,61 @@ public class FavouriteController {
 	
 	@PostMapping("/character/{id}")
 	public ResponseEntity<Character> addFavouriteCharacter(@PathVariable("id") int id, HttpSession session){
-		//if(session.getAttribute("logged in")!=null&&(Boolean)session.getAttribute("logged in")) {
-			//User user = (User)session.getAttribute("user");
+		if(session.getAttribute("logged in")!=null&&(Boolean)session.getAttribute("logged in")) {
+			User user = (User)session.getAttribute("user");
 
-		User user = getUser();
-		Character character = characterService.findById(id);
-		favouriteService.addFavouriteCharacter(character,user);
-		return ResponseEntity.status(201).build();
-		//}
-		//return ResponseEntity.status(403).build();
+			//User user = getUser();
+			Character character = characterService.findById(id);
+			favouriteService.addFavouriteCharacter(character,user);
+			return ResponseEntity.status(201).build();
+		}
+		return ResponseEntity.status(403).build();
 	}
 	
 	@PostMapping("/potion/{id}")
 	public ResponseEntity<Potion> addFavouritePotion(@PathVariable("id") int id, HttpSession session){
-		//if(session.getAttribute("logged in")!=null&&(Boolean)session.getAttribute("logged in")) {
-			//User user = (User)session.getAttribute("user");
-
-		User user = getUser();
-		Potion potion = potionService.findById(id);
-		favouriteService.addFavouritePotion(potion,user);
-		return ResponseEntity.status(201).build();
-		//}
-		//return ResponseEntity.status(403).build();
+		if(session.getAttribute("logged in")!=null&&(Boolean)session.getAttribute("logged in")) {
+			User user = (User)session.getAttribute("user");
+			//User user = getUser();
+			Potion potion = potionService.findById(id);
+			favouriteService.addFavouritePotion(potion,user);
+			return ResponseEntity.status(201).build();
+		}
+		return ResponseEntity.status(403).build();
 	}
 	
 	@PostMapping("/spell/{id}")
 	public ResponseEntity<Spell> addFavouriteSpell(@PathVariable("id") int id, HttpSession session){
-		//if(session.getAttribute("logged in")!=null&&(Boolean)session.getAttribute("logged in")) {
-			//User user = (User)session.getAttribute("user");
-
-		User user = getUser();
-		Spell spell = spellService.findById(id);
-		favouriteService.addFavouriteSpell(spell,user);
-		return ResponseEntity.status(201).build();
-		//}
-		//return ResponseEntity.status(403).build();
+		if(session.getAttribute("logged in")!=null&&(Boolean)session.getAttribute("logged in")) {
+			User user = (User)session.getAttribute("user");
+			//User user = getUser();
+			Spell spell = spellService.findById(id);
+			favouriteService.addFavouriteSpell(spell,user);
+			return ResponseEntity.status(201).build();
+		}
+		return ResponseEntity.status(403).build();
+	}
+	
+	//Mapping get favourites
+	
+	@GetMapping("/character")
+	public List<String> getFavCharacters(HttpSession session){
+		User user = (User)session.getAttribute("user");
+		//User user = getUser();
+		return favouriteService.getFavCharacters(user);
+	}
+	
+	@GetMapping("/potion")
+	public List<String> getFavPotions(HttpSession session){
+		User user = (User)session.getAttribute("user");
+		//User user = getUser();
+		return favouriteService.getFavPotions(user);
+	}
+	
+	@GetMapping("/spell")
+	public List<String> getFavSpells(HttpSession session){
+		User user = (User)session.getAttribute("user");
+		//User user = getUser();
+		return favouriteService.getFavSpells(user);
 	}
 }
