@@ -103,12 +103,37 @@ public class FavouriteService {
 		return favList;
 	}
 	
-	public void deleteFavouriteSpell(Spell spell,User user) {
-		Favourites favourites = new Favourites();
-		favourites.setUserId(user.getId());
-		favourites.setSpellsId(spell.getId());
-		favouriteDao.delete(favourites);
+	
+	
+	public void deleteFavCharacter(User user, int characterId) {
+		List<Favourites> favUserList = favouriteDao.findByUserId(user.getId());
+		for(Favourites fav : favUserList) {
+			if(fav.getCharactersId()!=0 && fav.getCharactersId()==(characterId)) {
+				favouriteDao.delete(fav);
+			} 
+		}
 	}
+	
+	public void deleteFavPotion(User user, String potionId) {
+		List<Favourites> favUserList = favouriteDao.findByUserId(user.getId());
+		for(Favourites fav : favUserList) {
+			if(fav.getPotionsId()!=null && fav.getPotionsId().equals(potionId)) {
+				favouriteDao.delete(fav);
+			} 
+		}
+	}
+	
+	
+	public void deleteFavSpell(User user, String spellId) {
+		List<Favourites> favUserList = favouriteDao.findByUserId(user.getId());
+		for(Favourites fav : favUserList) {
+			if(fav.getSpellsId()!=null && fav.getSpellsId().equals(spellId)) {
+				favouriteDao.delete(fav);
+			} 
+		}
+	}
+	
+
 	
 	
 		

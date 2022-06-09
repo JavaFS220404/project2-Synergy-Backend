@@ -33,38 +33,15 @@ public class FavouriteController {
 
 	
 	private FavouriteService favouriteService;
-	private PotionService potionService;
-	private CharacterService characterService;
-	private SpellService spellService;
-	private UserDAO userDao;
 	
 	@Autowired
-	public FavouriteController(FavouriteService favouriteService, PotionService potionService,
-			CharacterService characterService, SpellService spellService, UserDAO userDao) {
+	public FavouriteController(FavouriteService favouriteService) {
 		super();
 		this.favouriteService = favouriteService;
-		this.potionService = potionService;
-		this.characterService = characterService;
-		this.spellService = spellService;
-		this.userDao = userDao;
 	}
 
-	/*
-	@GetMapping
-	public List<Character> viewAllFavouritelist(){
-		User user = getUser();
-		return favouriteService.viewAllFavouritelist(user);
-	}*/
-	@PostMapping
-	public ResponseEntity<Character> addFavourite(@RequestBody Character character, HttpSession session){
-		if(session.getAttribute("loggedin")!=null&&(Boolean)session.getAttribute("loggedin")) {
-			User user = (User)session.getAttribute("user");
-			//User user = getUser();
-			favouriteService.addFavouriteCharacter(character,user);
-			return ResponseEntity.status(201).build();
-		}
-		return ResponseEntity.status(403).build();
-	}
+	
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Character> deleteFavourite(@PathVariable("id") int id){
 		favouriteService.destroyCharacter(id);
@@ -74,7 +51,7 @@ public class FavouriteController {
 	
 	
 	
-	//Mapping individual favorites
+	//Post mapping individual favorites
 	
 	@PostMapping("/character/{id}")
 	public ResponseEntity<Character> addFavouriteCharacter(@PathVariable("id") int id, HttpSession session){
@@ -120,7 +97,7 @@ public class FavouriteController {
 	
 	
 	
-	//Mapping get favourites
+	//Mapping get all favorites
 	
 	@GetMapping("/character")
 	public List<String> getFavCharacters(HttpSession session){
@@ -148,24 +125,40 @@ public class FavouriteController {
 		}
 		return null;
 	}
-	/*
-	@DeleteMapping("/spell/{id}")
-	public ResponseEntity<Spell> deleteSpellFromFavs(@PathVariable("id") String id, HttpSession session){
+	
+	
+	//Delete mappings
+	
+	
+	@DeleteMapping("/character/{id}")
+	public ResponseEntity<Spell> deleteFavCharacter(@PathVariable("id") int id, HttpSession session){
 		if(session.getAttribute("loggedin")!=null && (Boolean)session.getAttribute("loggedin")) {
 			User user = (User)session.getAttribute("user");
-			Spell spell = new Spell();
-			spell.setId(id);
-			favouriteService.addFavouriteSpell(spell,user);
-			return ResponseEntity.status(201).build();
+			favouriteService.deleteFavCharacter(user, id);
+			return ResponseEntity.status(200).build();
+		}
+		return ResponseEntity.status(403).build();
+	}
+	
+	
+	@DeleteMapping("/potion/{id}")
+	public ResponseEntity<Spell> deleteFavPotion(@PathVariable("id") String id, HttpSession session){
+		if(session.getAttribute("loggedin")!=null && (Boolean)session.getAttribute("loggedin")) {
+			User user = (User)session.getAttribute("user");
+			favouriteService.deleteFavPotion(user, id);
+			return ResponseEntity.status(200).build();
 		}
 		return ResponseEntity.status(403).build();
 	}
 	
 	@DeleteMapping("/spell/{id}")
-	public ResponseEntity<Character> deleteFavourite(@PathVariable("id") int id){
-		favouriteService.destroyCharacter(id);
-		return ResponseEntity.status(200).build();
+	public ResponseEntity<Spell> deleteFavSpell(@PathVariable("id") String id, HttpSession session){
+		if(session.getAttribute("loggedin")!=null && (Boolean)session.getAttribute("loggedin")) {
+			User user = (User)session.getAttribute("user");
+			favouriteService.deleteFavSpell(user, id);
+			return ResponseEntity.status(200).build();
+		}
+		return ResponseEntity.status(403).build();
 	}
-	*/
 	
 }
