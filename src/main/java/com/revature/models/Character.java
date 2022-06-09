@@ -41,7 +41,7 @@ public class Character{
 	                joinColumns={@JoinColumn(name="parent_id")}, 
 	                inverseJoinColumns={@JoinColumn(name="child_id")})
 	private List<Character> parents;
-	//@ManyToMany(fetch=FetchType.EAGER)
+	
 	
 	@ManyToMany(mappedBy = "parents", cascade = CascadeType.ALL)
 	@JsonManagedReference
