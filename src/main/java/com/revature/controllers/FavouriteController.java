@@ -71,7 +71,7 @@ public class FavouriteController {
 	public ResponseEntity<Potion> addFavouritePotion(@PathVariable("id") String id, HttpSession session){
 		System.out.println("user: "+(User)session.getAttribute("user"));
 		System.out.println("loggedin: "+session.getAttribute("loggedin"));
-		if(session.getAttribute("logged in")!=null&&(Boolean)session.getAttribute("loggedin")) {
+		if(session.getAttribute("loggedin")!=null&&(Boolean)session.getAttribute("loggedin")) {
 			User user = (User)session.getAttribute("user");
 			Potion potion = new Potion();
 			potion.setId(id);
