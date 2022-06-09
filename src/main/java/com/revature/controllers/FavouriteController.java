@@ -165,6 +165,7 @@ public class FavouriteController {
 	public ResponseEntity<Character> deleteFavourite(@PathVariable("id") int id){
 		favouriteService.destroyCharacter(id);
 		return ResponseEntity.status(200).build();
-	}*/
+	}
+	*/
 	
 }
