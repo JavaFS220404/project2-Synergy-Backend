@@ -34,8 +34,9 @@ public class UserController {
 	public ResponseEntity<User> loginAttempt(@RequestBody User user, HttpSession session) {
 		user = userService.login(user);
 		if (user != null) {
-			session.setAttribute("logged in", true);
+			session.setAttribute("loggedin", true);
 			session.setAttribute("user", user);
+			System.out.println(user);
 			user.setPassword(null);
 			return ResponseEntity.status(200).body(user);
 		} else {

@@ -103,6 +103,13 @@ public class FavouriteService {
 		return favList;
 	}
 	
+	public void deleteFavouriteSpell(Spell spell,User user) {
+		Favourites favourites = new Favourites();
+		favourites.setUserId(user.getId());
+		favourites.setSpellsId(spell.getId());
+		favouriteDao.delete(favourites);
+	}
+	
 	
 		
 
