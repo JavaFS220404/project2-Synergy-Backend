@@ -1,5 +1,7 @@
 # [Harry Potter World] [Synergy- GitHub Heroes]
 Application that allows the user access information about the world of Harry Potter including characters, spells, and potions. They can also select their favorites from each category for easy reference.
+# Link for the second repository:
+https://github.com/JavaFS220404/project2-Synergy-Frontend
 ### Requirements
 Users can:
 * Register.
