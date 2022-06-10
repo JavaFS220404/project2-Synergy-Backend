@@ -1,30 +1,39 @@
 package com.revature.models;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
-public class Potion implements Serializable{
+@Entity
+public class Potion{
 
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private String id;
 	private String name;
 	private String effect;
 	private String sideEffects;
 	private String characteristics;
 	private String time;
 	private String difficulty;
+	
+	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn
 	private List<Ingredient> ingredients;
+	
 	private String inventors;
 	private String manufacturer;
 	
-	public Potion(int id, String name, String effect, String sideEffects, String characteristics, String time,
+	public Potion(String id, String name, String effect, String sideEffects, String characteristics, String time,
 			String difficulty, List<Ingredient> ingredients, String inventors, String manufacturer) {
 		super();
 		this.id = id;
@@ -44,11 +53,11 @@ public class Potion implements Serializable{
 	}
 	
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
