@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.revature.models.Character;
 
-import com.revature.models.Trainer;
 import com.revature.repositories.CharacterDAO;
 
 @Service
